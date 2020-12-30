@@ -1,28 +1,29 @@
+import java.util.ArrayList;
 public class EmpWageBuilder implements EmployeeWageOops
 {
 	//constant
    public static final int IS_FULL_TIME = 1;
    public static final int IS_PART_TIME = 2;
 
-	private int numOfCompany = 0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
 	public EmpWageBuilder() 
 	{
-		companyEmpWageArray = new CompanyEmpWage[5];
+		companyEmpWageArrayList = new ArrayList<>();
 	}
 	public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) 
 	{
-	companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
-
-	numOfCompany++;
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
+		companyEmpWageArrayList.add(companyEmpWage);
+	
 	}
 
 	public void computeEmpWage() 
 	{
-			for (int i=0; i<numOfCompany; i++) 
+			for (int i=0; i<companyEmpWageArrayList.size(); i++) 
 		{
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+			CompanyEmpWage companyEmpWage = companyEmpWageArrayList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
 
@@ -61,6 +62,7 @@ public class EmpWageBuilder implements EmployeeWageOops
 		System.out.println("Welcome to Employee Wage Computation");
 	   EmpWageBuilder empWageBuilder = new EmpWageBuilder();
 		empWageBuilder.addCompanyEmpWage("swiggy",20,5,20);
+		empWageBuilder.addCompanyEmpWage("UberEats",30,10,40);
 		empWageBuilder.addCompanyEmpWage("zomato",20,5,20);
       empWageBuilder.computeEmpWage();
 	}
@@ -95,4 +97,3 @@ interface EmployeeWageOops
    public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays,int maxHrPerMonth);
    public void computeEmpWage();
 }
-
