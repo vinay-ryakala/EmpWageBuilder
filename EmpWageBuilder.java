@@ -4,18 +4,16 @@ public class EmpWageBuilder
 	//CONSTANTS
 	public static final int IS_FULL_TIME=1;
 	public static final int IS_PART_TIME=2;
-	public static final int EMP_RATE_PER_HR=20;
-	public static final int NUM_OF_WORKING_DAYS=20;
-	public static final int MAX_HR_IN_MONTH=100;
 
-	public static void computeEmpWage()
+	public static void computeEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth)
 	{
 		//Variables
       int empHrs=0;
       int totalEmpHrs=0;
       int salary=0;
       int totalWorkingDays=0;
-      while (totalEmpHrs<MAX_HR_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
+
+      while (totalEmpHrs<maxHrPerMonth && totalWorkingDays<numberOfWorkingDays)
       {
          int empCheck=(int)(Math .random()*10%3);
          totalWorkingDays++;
@@ -34,15 +32,16 @@ public class EmpWageBuilder
              }
          totalEmpHrs+=empHrs;
       }
-      salary=totalEmpHrs*EMP_RATE_PER_HR;
+      salary=totalEmpHrs*empRatePerHr;
       System.out.println("Number of working days:"+totalWorkingDays+" and Total emp hrs: "+totalEmpHrs);
-      System.out.println("Employee wage :"+salary);
+      System.out.println("Employee wage for company :"+company+"is :"+salary);
 
 	}
 	public static void main (String[] args)
 	{
 		System.out.println("Welcome to Employee Wage Computation");
-	   computeEmpWage();
+	   computeEmpWage("swiggy",30,5,10);
+		computeEmpWage("zomato",40,8,20);
 	}
 }
 
