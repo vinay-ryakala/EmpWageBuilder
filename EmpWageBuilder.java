@@ -1,4 +1,6 @@
+import java.util.HashMap;
 import java.util.ArrayList;
+
 public class EmpWageBuilder implements EmployeeWageOops
 {
 	//constant
@@ -6,15 +8,17 @@ public class EmpWageBuilder implements EmployeeWageOops
    public static final int IS_PART_TIME = 2;
 
 	private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
+	private HashMap<String,CompanyEmpWage> companyEmpWageMap;
 	public EmpWageBuilder() 
 	{
 		companyEmpWageArrayList = new ArrayList<>();
+		companyEmpWageMap= new HashMap<>();
 	}
 	public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) 
 	{
 		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
 		companyEmpWageArrayList.add(companyEmpWage);
-	
+		companyEmpWageMap.put(company, companyEmpWage);
 	}
 
 	public void computeEmpWage() 
@@ -61,6 +65,10 @@ public class EmpWageBuilder implements EmployeeWageOops
 		return totalEmpHrs*companyEmpWage.empRatePerHr; 
 	}
 
+	public int getTotalEmpWage(String company) 
+	{
+		return companyEmpWageMap.get(company).salary;
+	}
 	public static void main (String[] args)
 	{
 		System.out.println("Welcome to Employee Wage Computation");
@@ -68,7 +76,9 @@ public class EmpWageBuilder implements EmployeeWageOops
 		empWageBuilder.addCompanyEmpWage("swiggy",20,5,20);
 		empWageBuilder.addCompanyEmpWage("UberEats",30,10,40);
 		empWageBuilder.addCompanyEmpWage("zomato",20,5,20);
+		empWageBuilder.addCompanyEmpWage("FoodPanda",15,8,30);
       empWageBuilder.computeEmpWage();
+		System.out.println("Total wage of queried by zomato: "+empWageBuilder.getTotalEmpWage("zomato"));
 	}
 }
  class CompanyEmpWage
