@@ -1,4 +1,4 @@
-public class EmpWageBuilder
+public class EmpWageBuilder implements EmployeeWageOops
 {
 	//constant
    public static final int IS_FULL_TIME = 1;
@@ -10,14 +10,14 @@ public class EmpWageBuilder
 	{
 		companyEmpWageArray = new CompanyEmpWage[5];
 	}
-	private void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) 
+	public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) 
 	{
 	companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
 
 	numOfCompany++;
 	}
 
-	private void computeEmpWage() 
+	public void computeEmpWage() 
 	{
 			for (int i=0; i<numOfCompany; i++) 
 		{
@@ -61,7 +61,7 @@ public class EmpWageBuilder
 		System.out.println("Welcome to Employee Wage Computation");
 	   EmpWageBuilder empWageBuilder = new EmpWageBuilder();
 		empWageBuilder.addCompanyEmpWage("swiggy",20,5,20);
-		empWageBuilder.addCompanyEmpWage("zomatto",20,5,20);
+		empWageBuilder.addCompanyEmpWage("zomato",20,5,20);
       empWageBuilder.computeEmpWage();
 	}
 }
@@ -90,3 +90,9 @@ public class EmpWageBuilder
          return "Total employee wage for: " +company+ " is " +salary;
    }
 }
+interface EmployeeWageOops
+{
+   public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays,int maxHrPerMonth);
+   public void computeEmpWage();
+}
+
