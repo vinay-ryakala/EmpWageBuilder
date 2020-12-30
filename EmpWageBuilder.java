@@ -32,7 +32,9 @@ public class EmpWageBuilder implements EmployeeWageOops
 		//Variables
       int empHrs=0;
       int totalEmpHrs=0;
-      int totalWorkingDays=0;
+      int dailySalary=0;
+		int totalWorkingDays=0;
+		ArrayList<Integer> dailyWage=new ArrayList<Integer>();
 
       while (totalEmpHrs<companyEmpWage.maxHrPerMonth && totalWorkingDays<companyEmpWage.numberOfWorkingDays)
       {
@@ -51,10 +53,12 @@ public class EmpWageBuilder implements EmployeeWageOops
                default:
                empHrs=0;
              }
-         totalEmpHrs+=empHrs;
+         	int daySalary=empHrs*companyEmpWage.empRatePerHr;
+				dailyWage.add(daySalary);
+				totalEmpHrs+=empHrs;
       }
-      return totalEmpHrs*companyEmpWage.empRatePerHr;
-           
+      System.out.println("Dailywage of employee for company"+companyEmpWage.company+"is:"+dailyWage);
+		return totalEmpHrs*companyEmpWage.empRatePerHr; 
 	}
 
 	public static void main (String[] args)
